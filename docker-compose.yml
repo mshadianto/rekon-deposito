@@ -1,0 +1,60 @@
+# ============================================
+# File: docker-compose.yml
+# ============================================
+
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: deposito-rekon-app
+    ports:
+      - "8501:8501"
+    environment:
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - DB_HOST=${DB_HOST:-postgres}
+      - DB_PORT=${DB_PORT:-5432}
+      - DB_NAME=${DB_NAME:-deposito_rekon}
+      - DB_USER=${DB_USER:-postgres}
+      - DB_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./exports:/app/exports
+    depends_on:
+      - postgres
+    restart: unless-stopped
+    networks:
+      - rekon-network
+
+  postgres:
+    image: postgres:15-alpine
+    container_name: deposito-rekon-db
+    environment:
+      - POSTGRES_DB=${DB_NAME:-deposito_rekon}
+      - POSTGRES_USER=${DB_USER:-postgres}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    restart: unless-stopped
+    networks:
+      - rekon-network
+
+  redis:
+    image: redis:7-alpine
+    container_name: deposito-rekon-cache
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
+    networks:
+      - rekon-network
+
+volumes:
+  postgres_data:
+
+networks:
+  rekon-network:
+    driver: bridge

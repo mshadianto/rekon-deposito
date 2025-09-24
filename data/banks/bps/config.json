@@ -1,0 +1,6 @@
+{
+  "bank_code": "BPS",
+  "bank_name": "Bank Pembangunan Syariah",
+  "nisbah_rates": {"SA": 0.0475, "SL": 0.0475, "NM": 0.0500, "LPS": 0.0450},
+  "year_days": 360
+}

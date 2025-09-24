@@ -1,0 +1,33 @@
+# ============================================
+# File: .dockerignore
+# ============================================
+
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+*.egg-info/
+.vscode/
+.idea/
+.DS_Store
+.env
+.env.local
+*.log
+logs/*
+!logs/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
+exports/*
+!exports/.gitkeep
+.git/
+.gitignore
+README.md
+*.md
+tests/
+.pytest_cache/
+.coverage
+htmlcov/

@@ -1,0 +1,6 @@
+{
+  "bank_code": "BTPN",
+  "bank_name": "Bank BTPN Syariah",
+  "nisbah_rates": {"SA": 0.0930, "SL": 0.0930, "NM": 0.0835, "LPS": 0.0450},
+  "year_days": 360
+}
